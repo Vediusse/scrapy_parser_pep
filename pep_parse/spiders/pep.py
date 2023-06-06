@@ -24,5 +24,4 @@ class PepSpider(scrapy.Spider):
             "name": pep_name,
             "status": response.css("dt:contains('Status') + dd ::text").get(),
         }
-        print(data)
         yield PepParseItem(data)
