@@ -12,7 +12,7 @@ class PepParsePipeline:
     def __init__(self):
         self.pep_statuses = {}
 
-    def open_spider(self,spider):
+    def open_spider(self, spider):
         pass
 
     def process_item(self, item: PepParseItem, spider):
@@ -25,8 +25,8 @@ class PepParsePipeline:
         return item
 
     def close_spider(
-        self,
-        spider,
+            self,
+            spider,
     ):
         results = [("Статус", "Количество")]
         for keys, values in self.pep_statuses.items():

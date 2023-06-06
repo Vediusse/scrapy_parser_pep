@@ -15,14 +15,14 @@ class PepSpider(scrapy.Spider):
                 yield response.follow(pep_link, callback=self.parse_pep)
 
     def parse_pep(self, response: scrapy.http.Response):
-        pep_number, pep_name = response.css("h1.page-title::text").get().split(" – ")
+        pep_number, pep_name = (
+            response.css("h1.page-title::text").get().split(" – ")
+        )
         pep_number = pep_number.replace("PEP ", "")
         data = {
             "number": pep_number,
             "name": pep_name,
             "status": response.css("dt:contains('Status') + dd ::text").get(),
         }
-        # pep-content > dl > dd:nth-child(4) > abbr
-        # pep-content > dl > dd:nth-child(6) > abbr
         print(data)
         yield PepParseItem(data)
